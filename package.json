@@ -1,0 +1,36 @@
+{
+  "name": "console-log-colors",
+  "version": "0.0.1",
+  "description": "Console log colors helper for simple useage. Without any dependence.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lzwme/console-log-colors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lzwme/console-log-colors/issues"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "colors",
+    "console",
+    "console.log"
+  ],
+  "author": {
+    "name": "lzwme",
+    "url": "https://lzw.me"
+  },
+  "maintainers": [
+    {
+      "name": "renxia",
+      "url": "https://lzw.me"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lzwme/console-log-colors",
+  "engines": {
+    "node": ">= 4.1.0"
+  },
+  "scripts": {
+    test: "node examples/index.js"
+  }
+}
