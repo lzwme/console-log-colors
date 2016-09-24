@@ -1,5 +1,6 @@
 /**
  * colors string
+ * @see https://github.com/lzwme/console-log-colors.git
  */
 
 var colorList = {
