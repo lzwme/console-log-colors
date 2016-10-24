@@ -15,7 +15,7 @@ npm install console-log-colors --save-dev
 First, import the lib:
 
 ```js
-var colors = require('../src/index');
+var colors = require('console-log-colors');
 var color = colors.color;
 var log = colors.log;
 ```
