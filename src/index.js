@@ -69,7 +69,11 @@ function log(str, colorType) {
 }
 
 Object.keys(colorList).forEach(function (key) {
-    log[key] = function(str) {
+    log[key] = function() {
+        var str = '';
+        for (var i = 0;i < arguments.length; i++) {
+            str += ' ' + String(arguments[i]);
+        }
         console.log(color(str, key));
     }
 });

@@ -1,4 +1,31 @@
-# console-log-colors
+[![Code Climate](https://lzw.me/images/logo.png)](https://lzw.me)
+[![console-log-colors](https://nodei.co/npm/console-log-colors.png)][download-url]
+
+console-log-colors
+========
+
+[![NPM version][npm-image]][npm-url]
+[![node version][node-image]][node-url]
+[![npm download][download-image]][download-url]
+[![GitHub issues][issues-img]][issues-url]
+[![GitHub forks][forks-img]][forks-url]
+[![GitHub stars][stars-img]][stars-url]
+[![minzipped size][bundlephobia-img]][bundlephobia-url]
+
+[stars-img]: https://img.shields.io/github/stars/lzwme/dir-fast-copy.svg
+[stars-url]: https://github.com/lzwme/dir-fast-copy/stargazers
+[forks-img]: https://img.shields.io/github/forks/lzwme/dir-fast-copy.svg
+[forks-url]: https://github.com/lzwme/dir-fast-copy/network
+[issues-img]: https://img.shields.io/github/issues/lzwme/dir-fast-copy.svg
+[issues-url]: https://github.com/lzwme/dir-fast-copy/issues
+[npm-image]: https://img.shields.io/npm/v/console-log-colors.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/console-log-colors
+[node-image]: https://img.shields.io/badge/node.js-%3E=_10.9.0-green.svg?style=flat-square
+[node-url]: https://nodejs.org/download/
+[download-image]: https://img.shields.io/npm/dm/console-log-colors.svg?style=flat-square
+[download-url]: https://npmjs.org/package/console-log-colors
+[bundlephobia-url]: https://bundlephobia.com/result?p=console-log-colors@latest
+[bundlephobia-img]: https://badgen.net/bundlephobia/minzip/console-log-colors@latest
 
 Console log colors helper for simple useage. Without any dependence.
 
@@ -15,29 +42,17 @@ npm install console-log-colors --save-dev
 First, import the lib:
 
 ```js
-var colors = require('console-log-colors');
-var color = colors.color;
-var log = colors.log;
+const {color, log} = require('../src/index');
 ```
 
-### USAGE API 1: `color(String, color type)`
-```js
-console.log(color("color('text', 'red')", 'red'));
-```
-
-### USAGE API 2: `color[color type](String)`
+### `color[color type](string)`
 ```js
 console.log(color.red("color.red('text')"));
 ```
 
-### USAGE API 3: `log(String, color type)`
+### `log[color type](str)`
 ```js
-log("log('text', 'blue')", 'blue');
-```
-
-### USAGE API 4: `log[color type](String)`
-```js
-log.red("log.red('text')");
+log.red("log.red('text')", 'test');
 log.green("log.green('text')");
 ```
 
@@ -57,7 +72,7 @@ Object.keys(color.list).forEach(function (colorType) {
 
 ## Colors Styles
 
-text colors
+text colors:
 
 * black
 * red
@@ -70,7 +85,7 @@ text colors
 * gray
 * grey
 
-background colors
+background colors:
 
 * bgBlack
 * bgRed
@@ -80,3 +95,14 @@ background colors
 * bgMagenta
 * bgCyan
 * bgWhite
+
+Others:
+
+* reset
+* bold
+* dim
+* italic
+* underline
+* inverse
+* hidden
+* strikethrough
