@@ -4,8 +4,8 @@
  */
 
 var colorList = {
+    // modifier
     reset: [0, 0],
-
     bold: [1, 22],
     dim: [2, 22],
     italic: [3, 23],
@@ -14,6 +14,7 @@ var colorList = {
     hidden: [8, 28],
     strikethrough: [9, 29],
 
+    // color
     black: [30, 39],
     red: [31, 39],
     green: [32, 39],
@@ -25,6 +26,16 @@ var colorList = {
     gray: [90, 39],
     grey: [90, 39],
 
+    // Bright color
+    redBright: [91, 39],
+    greenBright: [92, 39],
+    yellowBright: [93, 39],
+    blueBright: [94, 39],
+    magentaBright: [95, 39],
+    cyanBright: [96, 39],
+    whiteBright: [97, 39],
+
+    // bgColor
     bgBlack: [40, 49],
     bgRed: [41, 49],
     bgGreen: [42, 49],
@@ -34,7 +45,7 @@ var colorList = {
     bgCyan: [46, 49],
     bgWhite: [47, 49],
 
-    // legacy styles for colors pre v1.0.0
+    // bgColor - legacy styles for colors pre v1.0.0
     blackBG: [40, 49],
     redBG: [41, 49],
     greenBG: [42, 49],
@@ -42,7 +53,17 @@ var colorList = {
     blueBG: [44, 49],
     magentaBG: [45, 49],
     cyanBG: [46, 49],
-    whiteBG: [47, 49]
+    whiteBG: [47, 49],
+
+    // Bright bgColor
+    bgBlackBright: [100, 49],
+    bgRedBright: [101, 49],
+    bgGreenBright: [102, 49],
+    bgYellowBright: [103, 49],
+    bgBlueBright: [104, 49],
+    bgMagentaBright: [105, 49],
+    bgCyanBright: [106, 49],
+    bgWhiteBright: [107, 49],
 };
 
 function color(str, colorType) {
@@ -80,5 +101,6 @@ Object.keys(colorList).forEach(function (key) {
 
 module.exports = {
     color: color,
-    log: log
+    log: log,
+    colorList: colorList,
 }

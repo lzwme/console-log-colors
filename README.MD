@@ -70,9 +70,20 @@ Object.keys(color.list).forEach(function (colorType) {
 });
 ```
 
-## Colors Styles
+## Styles
 
-text colors:
+`modifier:`
+
+* reset
+* bold
+* dim
+* italic
+* underline
+* inverse
+* hidden
+* strikethrough
+
+`color:`
 
 * black
 * red
@@ -85,7 +96,17 @@ text colors:
 * gray
 * grey
 
-background colors:
+`Bright color:`
+
+* redBright
+* greenBright
+* yellowBright
+* blueBright
+* magentaBright
+* cyanBright
+* whiteBright
+
+`bgColor:`
 
 * bgBlack
 * bgRed
@@ -96,13 +117,24 @@ background colors:
 * bgCyan
 * bgWhite
 
-Others:
+`bgColor - legacy styles for colors pre version:`
 
-* reset
-* bold
-* dim
-* italic
-* underline
-* inverse
-* hidden
-* strikethrough
+* blackBG
+* redBG
+* greenBG
+* yellowBG
+* blueBG
+* magentaBG
+* cyanBG
+* whiteBG
+
+`Bright bgColor:`
+
+* bgBlackBright
+* bgRedBright
+* bgGreenBright
+* bgYellowBright
+* bgBlueBright
+* bgMagentaBright
+* bgCyanBright
+* bgWhiteBright
