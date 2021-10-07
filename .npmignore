@@ -3,3 +3,4 @@ test
 publish.bat
 .eslintrc
 examples
+.editorconfig
