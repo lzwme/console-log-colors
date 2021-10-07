@@ -1,7 +1,3 @@
-/**
- * colors string
- * @see https://github.com/lzwme/console-log-colors.git
- */
 var colorList = {
   // modifier
   reset: [0, 0],
@@ -64,7 +60,6 @@ var colorList = {
   bgCyanBright: [106, 49],
   bgWhiteBright: [107, 49],
 };
-
 var isDisabled = process.env.NO_COLOR || process.argv.includes('--no-color');
 var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   process.platform === 'win32' ||
@@ -73,9 +68,11 @@ var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   process.env.CI);
 
 function color(str, colorType) {
-  var typecfg = colorList[colorType];
+  if (str === '' || str === void 0) return '';
 
+  var typecfg = colorList[colorType];
   if (!isSupported || !typecfg) return str;
+
   // return '\u001b[' + typecfg[0] + 'm' + str + '\u001b[' + typecfg[1] + 'm';
   return '\x1b[1m\x1b[' + typecfg[0] + 'm' + str + '\x1b[' + typecfg[1] + 'm\x1b[22m';
 }
@@ -85,7 +82,6 @@ function log(str, colorType) { console.log(color(str, colorType)) }
 
 Object.keys(colorList).forEach(function (key) {
   color[key] = function (str) { return color(str, key); };
-
   log[key] = function () {
     var arr = [];
     for (var i = 0; i < arguments.length; i++) arr.push(String(arguments[i]));
