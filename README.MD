@@ -131,15 +131,15 @@ Object.keys(color.list).forEach(function (colorType) {
 
 该插件由[志文工作室](https://lzw.me)开发和维护。
 
-[stars-badge]: https://img.shields.io/github/stars/lzwme/fed-lint-helper.svg
-[stars-url]: https://github.com/lzwme/fed-lint-helper/stargazers
-[forks-badge]: https://img.shields.io/github/forks/lzwme/fed-lint-helper.svg
-[forks-url]: https://github.com/lzwme/fed-lint-helper/network
-[issues-badge]: https://img.shields.io/github/issues/lzwme/fed-lint-helper.svg
-[issues-url]: https://github.com/lzwme/fed-lint-helper/issues
+[stars-badge]: https://img.shields.io/github/stars/lzwme/console-log-colors.svg
+[stars-url]: https://github.com/lzwme/console-log-colors/stargazers
+[forks-badge]: https://img.shields.io/github/forks/lzwme/console-log-colors.svg
+[forks-url]: https://github.com/lzwme/console-log-colors/network
+[issues-badge]: https://img.shields.io/github/issues/lzwme/console-log-colors.svg
+[issues-url]: https://github.com/lzwme/console-log-colors/issues
 [npm-badge]: https://img.shields.io/npm/v/console-log-colors.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/console-log-colors
-[node-badge]: https://img.shields.io/badge/node.js-%3E=_14.0.0-green.svg?style=flat-square
+[node-badge]: https://img.shields.io/badge/node.js-%3E=_4.0.0-green.svg?style=flat-square
 [node-url]: https://nodejs.org/download/
 [download-badge]: https://img.shields.io/npm/dm/console-log-colors.svg?style=flat-square
 [download-url]: https://npmjs.org/package/console-log-colors
