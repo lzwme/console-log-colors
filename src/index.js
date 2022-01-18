@@ -73,8 +73,7 @@ function color(str, colorType) {
   var typecfg = colorList[colorType];
   if (!isSupported || !typecfg) return str;
 
-  // return '\u001b[' + typecfg[0] + 'm' + str + '\u001b[' + typecfg[1] + 'm';
-  return '\x1b[1m\x1b[' + typecfg[0] + 'm' + str + '\x1b[' + typecfg[1] + 'm\x1b[22m';
+  return '\x1b[' + typecfg[0] + 'm' + str + '\x1b[' + typecfg[1] + 'm';
 }
 color.list = colorList;
 
