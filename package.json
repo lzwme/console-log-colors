@@ -1,6 +1,6 @@
 {
   "name": "console-log-colors",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Console log colors helper for simple lightweight useage, no external dependencies.",
   "repository": {
     "type": "git",
