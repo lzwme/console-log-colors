@@ -8,7 +8,6 @@
 [![GitHub issues][issues-badge]][issues-url]
 [![GitHub forks][forks-badge]][forks-url]
 [![GitHub stars][stars-badge]][stars-url]
-[![minzipped size][bundlephobia-badge]][bundlephobia-url]
 
 Console log colors helper for simple lightweight useage, no external dependencies.
 
@@ -143,5 +142,5 @@ Object.keys(color.list).forEach(function (colorType) {
 [node-url]: https://nodejs.org/download/
 [download-badge]: https://img.shields.io/npm/dm/console-log-colors.svg?style=flat-square
 [download-url]: https://npmjs.org/package/console-log-colors
-[bundlephobia-url]: https://bundlephobia.com/result?p=console-log-colors@latest
-[bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/console-log-colors@latest
+[bundlephobia-url]: https://bundlephobia.com/result?p=console-log-colors
+[bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/console-log-colors
