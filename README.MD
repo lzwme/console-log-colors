@@ -16,7 +16,7 @@ Please use [colorette](https://github.com/jorgebucaran/colorette) or [colors.js]
 ## INSTALL
 
 ```bash
-npm install console-log-colors --save-dev
+npm install console-log-colors
 ```
 
 ## USAGE/API
@@ -25,21 +25,25 @@ First, import the lib:
 
 ```js
 const { color, log } = require('console-log-colors');
-const { red, green, cyan } = color;
+const { red, green, cyan, cyanBright } = color;
 ```
 
 ### `color[color type](string)`
+
 ```js
-console.log(red("color.red('text')"));
+console.log(red('red'), green('green'), cyan('cyan'), cyanBright('cyanBright'));
 ```
 
 ### `log[color type](str)`
+
 ```js
-log.red("log.red('text')", 'test');
-log.green("log.green('text')");
+log.red('red text');
+log.green('green text');
+log.cyanBright('cyanBright text', 'cyanBright text2');
 ```
 
-### Others Useage Demo
+### Examples
+
 ```js
 log.red(green('green'));
 log.red('red', green('green'), 'default', cyan('cyan'), 'default');
