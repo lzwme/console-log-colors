@@ -10,6 +10,7 @@
     "url": "https://github.com/lzwme/console-log-colors/issues"
   },
   "main": "src/index.js",
+  "module": "src/esm.js",
   "keywords": [
     "terminal",
     "command-line",
