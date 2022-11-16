@@ -5,14 +5,25 @@ const clc = require('../');
 
 console.log(Object.keys(clc));
 
-log.yellow('------------------------------------------');
-
+clc.log.yellow('------------------------------------------');
+// simple examples
 const { color, red, green, cyan, log, enable, disable } = require('../');
 
 console.log(green('This is a green string!'));
 console.log(color.green('This is a green string!'));
-log.green('This is a green string!');
 log('This is a green string!', 'green');
+log.green('This is a green string!', 'This is a green string!');
+
+// methods
+console.log('isSupported:', clc.isSupported());
+clc.disable();
+console.log('isSupported(after disabled):', clc.isSupported());
+clc.enable();
+console.log('isSupported(after enabled):', clc.isSupported());
+
+const greenstr = clc.green('This is a green string!');
+const striped = clc.strip(greenstr);
+console.log(greenstr, ' ==> [striped]', striped);
 
 log.yellow('------------------------------------------');
 

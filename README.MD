@@ -21,17 +21,27 @@ npm install console-log-colors
 
 ## USAGE/API
 
-Example:
-
 ```js
 const { color, log, red, green, cyan, cyanBright } = require('console-log-colors');
 // or use import
 import { color, log, red, green, cyan, cyanBright } from 'console-log-colors';
 
+// ansi colors
 console.log(green('This is a green string!'));
 console.log(color.green('This is a green string!'));
-log.green('This is a green string!'));
 log('This is a green string!', 'green');
+log.green('This is a green string!', 'This is a green string!');
+
+// helper methods
+console.log('isSupported:', clc.isSupported());
+clc.disable();
+console.log('isSupported(after disabled):', clc.isSupported());
+clc.enable();
+console.log('isSupported(after enabled):', clc.isSupported());
+
+const greenstr = clc.green('This is a green string!');
+const striped = clc.strip(greenstr);
+console.log(greenstr, ' ==> [striped]', striped);
 ```
 
 ### `color[color type](string)`
@@ -133,6 +143,13 @@ Object.keys(color.list).forEach(function (colorType) {
 * bgMagentaBright
 * bgCyanBright
 * bgWhiteBright
+
+## Methods
+
+- `isSupported(): boolean;`
+- `enable(): boolean;`
+- `disable(): boolean;`
+- `strip(str: string): string;`
 
 ## License
 
