@@ -164,10 +164,10 @@ Object.keys(color.list).forEach(function (colorType) {
 [issues-badge]: https://img.shields.io/github/issues/lzwme/console-log-colors.svg
 [issues-url]: https://github.com/lzwme/console-log-colors/issues
 [npm-badge]: https://img.shields.io/npm/v/console-log-colors.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/console-log-colors
+[npm-url]: https://npmjs.com/package/console-log-colors
 [node-badge]: https://img.shields.io/badge/node.js-%3E=_4.0.0-green.svg?style=flat-square
 [node-url]: https://nodejs.org/download/
 [download-badge]: https://img.shields.io/npm/dm/console-log-colors.svg?style=flat-square
-[download-url]: https://npmjs.org/package/console-log-colors
+[download-url]: https://npmjs.com/package/console-log-colors
 [bundlephobia-url]: https://bundlephobia.com/result?p=console-log-colors
 [bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/console-log-colors

@@ -1,0 +1,23 @@
+# see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Publish Package to npmjs for GPA
+
+on:
+  release:
+    types: [created]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  npm-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: https://registry.npmjs.com
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

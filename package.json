@@ -11,6 +11,7 @@
   },
   "main": "src/index.js",
   "module": "src/esm.js",
+  "types": "src/index.d.ts",
   "keywords": [
     "terminal",
     "command-line",
@@ -42,6 +43,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.com"
   },
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "node examples/index.js"
   }
