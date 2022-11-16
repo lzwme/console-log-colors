@@ -21,17 +21,23 @@ npm install console-log-colors
 
 ## USAGE/API
 
-First, import the lib:
+Example:
 
 ```js
-const { color, log } = require('console-log-colors');
-const { red, green, cyan, cyanBright } = color;
+const { color, log, red, green, cyan, cyanBright } = require('console-log-colors');
+// or use import
+import { color, log, red, green, cyan, cyanBright } from 'console-log-colors';
+
+console.log(green('This is a green string!'));
+console.log(color.green('This is a green string!'));
+log.green('This is a green string!'));
+log('This is a green string!', 'green');
 ```
 
 ### `color[color type](string)`
 
 ```js
-console.log(red('red'), green('green'), cyan('cyan'), cyanBright('cyanBright'));
+console.log(color.red('red'), green('green'), cyan('cyan'), cyanBright('cyanBright'));
 ```
 
 ### `log[color type](str)`

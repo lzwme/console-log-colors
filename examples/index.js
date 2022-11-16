@@ -1,9 +1,20 @@
 /**
  * useage
  */
-var clc = require('../');
-var { color, log, enable, disable } = clc;
-var { red, green, cyan } = color;
+const clc = require('../');
+
+console.log(Object.keys(clc));
+
+log.yellow('------------------------------------------');
+
+const { color, red, green, cyan, log, enable, disable } = require('../');
+
+console.log(green('This is a green string!'));
+console.log(color.green('This is a green string!'));
+log.green('This is a green string!');
+log('This is a green string!', 'green');
+
+log.yellow('------------------------------------------');
 
 // color(String, color type)
 log.yellow('USAGE1: color(String, color type) ');
@@ -46,3 +57,7 @@ console.log(green('[green]color support disabled:'), clc.isSupported());
 
 enable();
 log.green('[green]color support enabled:', clc.isSupported());
+
+log.yellow('------------------------------------------');
+const redstr = clc.red('redstr');
+console.log('colored:', redstr, ' =>  striped:', clc.strip(redstr));

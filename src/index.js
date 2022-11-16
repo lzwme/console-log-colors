@@ -77,22 +77,23 @@ function color(str, colorType) {
 }
 color.list = colorList;
 
-function log(str, colorType) { console.log(color(str, colorType)) }
+var clc = {
+  color: color,
+  log(str, colorType) { console.log(color(str, colorType)) },
+  colorList: colorList,
+  isSupported() { return isSupported },
+  enable() { isSupported = true },
+  disable() { isSupported = false },
+  strip(str) { return str.replace(/\x1b\[\d+m/gm, '') },
+};
 
 Object.keys(colorList).forEach(function (key) {
-  color[key] = function (str) { return color(str, key); };
-  log[key] = function () {
+  clc[key] = color[key] = function (str) { return color(str, key); };
+  clc.log[key] = function () {
     var arr = [];
     for (var i = 0; i < arguments.length; i++) arr.push(String(arguments[i]));
     console.log(color(arr.join(' '), key));
   };
 });
 
-module.exports = {
-  color: color,
-  log: log,
-  colorList: colorList,
-  isSupported() { return isSupported },
-  enable() { isSupported = true },
-  disable() { isSupported = false },
-}
+module.exports = clc;
