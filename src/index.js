@@ -72,6 +72,7 @@ function extend(fn, keys) {
   if (typeof globalThis === 'object' && globalThis.Proxy) {
     return new Proxy(fn, {
       get(target, key) {
+        if (!(key in colorList)) return;
         if (keys.includes(key)) throw new Error('The key of chain call cannot be repeated: ' + key);
         if (!target[key]) target[key] = extend(function(s) { return fn(color(s, key)) }, keys.concat(key));
         return target[key];
