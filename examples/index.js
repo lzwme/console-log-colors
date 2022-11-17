@@ -9,12 +9,25 @@ clc.log.yellow('------------------------------------------');
 // simple examples
 const { color, red, green, cyan, log, enable, disable } = require('../');
 
+// ansi colors
 console.log(green('This is a green string!'));
 console.log(color.green('This is a green string!'));
+console.log(color('This is a green string!', 'green'));
+
+// chained styles
+console.log(cyan.bgRed.bold.underline('Hello world!'));
+
+try {
+  cyan.bold.cyan('Should throw Error');
+} catch(e) {
+  console.log(String(e.message).includes('cyan'), e.message);
+}
+
+// log
 log('This is a green string!', 'green');
 log.green('This is a green string!', 'This is a green string!');
 
-// methods
+// helpers
 console.log('isSupported:', clc.isSupported());
 clc.disable();
 console.log('isSupported(after disabled):', clc.isSupported());
@@ -55,13 +68,13 @@ log.red('red', green('green'), 'default', cyan('cyan'), 'default');
 log.red(color.whiteBG('red and whiteBG'));
 log.red('red', color.yellowBG('red and yellowBG'), 'red');
 
-log.yellow('------------------------------------------');
+log.yellow('-------------- log[colorType] list ----------------');
 
 Object.keys(color.list).forEach(function (colorType) {
   log[colorType](colorType);
 });
 
-log.yellow('------------------------------------------');
+log.yellow('-------------------- helpers ----------------------');
 
 disable();
 console.log(green('[green]color support disabled:'), clc.isSupported());
@@ -69,6 +82,5 @@ console.log(green('[green]color support disabled:'), clc.isSupported());
 enable();
 log.green('[green]color support enabled:', clc.isSupported());
 
-log.yellow('------------------------------------------');
 const redstr = clc.red('redstr');
 console.log('colored:', redstr, ' =>  striped:', clc.strip(redstr));

@@ -49,16 +49,18 @@ type ColorList =
   | "bgCyanBright"
   | "bgWhiteBright";
 
-export const color: {
-  [key in ColorList]: (str: any) => string;
-} & {
-  list: ColorList[];
-};
-
-interface Log extends Record<ColorList, (...args) => void> {
-  (str: string, type: ColorList): void;
+interface StyleFN extends Record<ColorList, StyleFN> {
+  (s: string): string;
 }
-export const log: Log;
+
+export const color: {
+  (str: string, type: ColorList): string;
+  list: ColorList[];
+} & Record<ColorList, StyleFN>;
+
+export const log: Record<ColorList, (...args) => void> & {
+  (str: string, type: ColorList): void;
+};
 
 export const colorList: ColorList[];
 export function isSupported(): boolean;
@@ -70,6 +72,7 @@ export = {
   ...color,
   color,
   log,
+  colorList,
   isSupported,
   enable,
   disable,

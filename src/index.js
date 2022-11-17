@@ -40,7 +40,7 @@ var colorList = {
   bgCyan: [46, 49],
   bgWhite: [47, 49],
 
-  // bgColor - legacy styles for colors pre v1.0.0
+  // bgColor - legacy styles
   blackBG: [40, 49],
   redBG: [41, 49],
   greenBG: [42, 49],
@@ -67,6 +67,24 @@ var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   (require('tty').isatty(1) && process.env.TERM !== 'dumb') ||
   process.env.CI);
 
+function extend(fn, keys) {
+  if (global.Proxy) {
+    return new Proxy(fn, {
+      get(target, key) {
+        if (keys.includes(key)) throw new Error('The key of chain call cannot be repeated: ' + key);
+        if (!target[key]) target[key] = extend(function(s) { return fn(color(s, key)) }, keys.concat(key));
+        return target[key];
+      }
+    });
+  }
+  Object.keys(colorList).forEach(function (key) {
+    if (keys.includes(key)) return;
+    Object.defineProperty(n, key, {
+      get() { return extend(function m(s) { return fn(color(s, key)) }, keys.concat(key)) }
+    });
+  });
+  return n;
+}
 function color(str, colorType) {
   if (str === '' || str === void 0) return '';
 
@@ -79,8 +97,8 @@ color.list = colorList;
 
 var clc = {
   color: color,
-  log(str, colorType) { console.log(color(str, colorType)) },
   colorList: colorList,
+  log(str, colorType) { console.log(color(str, colorType)) },
   isSupported() { return isSupported },
   enable() { isSupported = true },
   disable() { isSupported = false },
@@ -88,7 +106,7 @@ var clc = {
 };
 
 Object.keys(colorList).forEach(function (key) {
-  clc[key] = color[key] = function (str) { return color(str, key); };
+  clc[key] = color[key] = extend(function (str) { return color(str, key) }, [key]);
   clc.log[key] = function () {
     var arr = [];
     for (var i = 0; i < arguments.length; i++) arr.push(String(arguments[i]));

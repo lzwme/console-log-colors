@@ -29,10 +29,22 @@ import { color, log, red, green, cyan, cyanBright } from 'console-log-colors';
 // ansi colors
 console.log(green('This is a green string!'));
 console.log(color.green('This is a green string!'));
+console.log(color('This is a green string!', 'green'));
+
+// chained styles
+console.log(cyan.bgRed.bold.underline('Hello world!'));
+
+try {
+  cyan.bold.cyan('Should throw Error');
+} catch(e) {
+  console.log(String(e.message).includes('cyan'), e.message);
+}
+
+// log
 log('This is a green string!', 'green');
 log.green('This is a green string!', 'This is a green string!');
 
-// helper methods
+// helpers
 console.log('isSupported:', clc.isSupported());
 clc.disable();
 console.log('isSupported(after disabled):', clc.isSupported());
@@ -47,7 +59,18 @@ console.log(greenstr, ' ==> [striped]', striped);
 ### `color[color type](string)`
 
 ```js
-console.log(color.red('red'), green('green'), cyan('cyan'), cyanBright('cyanBright'));
+import { color } from 'console-log-colors';
+
+console.log(color.red('red'), color.green('green'), color.cyanBright('cyanBright'));
+```
+
+### Chained colors
+
+```js
+import { cyan } from 'console-log-colors';
+
+console.log(cyan.bgRed.bold.underline('Hello world!'));
+console.log(bold.cyan.bgRed.underline('Hello world!'));
 ```
 
 ### `log[color type](str)`
