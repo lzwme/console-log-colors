@@ -115,4 +115,4 @@ Object.keys(colorList).forEach(function (key) {
   };
 });
 
-module.exports = clc;
+if (typeof module === 'object') module.exports = clc;
