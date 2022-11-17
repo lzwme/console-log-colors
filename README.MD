@@ -9,7 +9,7 @@
 [![GitHub forks][forks-badge]][forks-url]
 [![GitHub stars][stars-badge]][stars-url]
 
-Console log colors helper for simple lightweight useage, no external dependencies.
+Console log colors helper for simple lightweight useage, no external dependencies. It supports use in Node.js and Browser(Since Chrome 69) environments.
 
 Please use [colorette](https://github.com/jorgebucaran/colorette) or [colors.js](https://github.com/Marak/colors.js) or [chalk](https://github.com/chalk/chalk) for complex requirements.
 
@@ -20,6 +20,8 @@ npm install console-log-colors
 ```
 
 ## USAGE/API
+
+Examples:
 
 ```js
 const { color, log, red, green, cyan, cyanBright } = require('console-log-colors');
@@ -56,14 +58,6 @@ const striped = clc.strip(greenstr);
 console.log(greenstr, ' ==> [striped]', striped);
 ```
 
-### `color[color type](string)`
-
-```js
-import { color } from 'console-log-colors';
-
-console.log(color.red('red'), color.green('green'), color.cyanBright('cyanBright'));
-```
-
 ### Chained colors
 
 ```js
@@ -73,21 +67,22 @@ console.log(cyan.bgRed.bold.underline('Hello world!'));
 console.log(bold.cyan.bgRed.underline('Hello world!'));
 ```
 
+### `color[color type](string)`
+
+```js
+import { color } from 'console-log-colors';
+
+console.log(color.red('red'), color.green('green'), color.cyanBright('cyanBright'));
+```
+
 ### `log[color type](str)`
 
 ```js
+import { log } from 'console-log-colors';
+
 log.red('red text');
 log.green('green text');
 log.cyanBright('cyanBright text', 'cyanBright text2');
-```
-
-### Examples
-
-```js
-log.red(green('green'));
-log.red('red', green('green'), 'default', cyan('cyan'), 'default');
-log.red(color.whiteBG('red and whiteBG'));
-log.red('red', color.yellowBG('red and yellowBG'), 'red');
 ```
 
 ### ALL Color Types => `color.list`
@@ -166,13 +161,6 @@ Object.keys(color.list).forEach(function (colorType) {
 * bgMagentaBright
 * bgCyanBright
 * bgWhiteBright
-
-## Methods
-
-- `isSupported(): boolean;`
-- `enable(): boolean;`
-- `disable(): boolean;`
-- `strip(str: string): string;`
 
 ## License
 

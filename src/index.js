@@ -60,15 +60,16 @@ var colorList = {
   bgCyanBright: [106, 49],
   bgWhiteBright: [107, 49],
 };
+if (typeof process === 'undefined' || !process.env) { var process = { env: {}, argv: ['--color'] }; }
 var isDisabled = process.env.NO_COLOR || process.argv.includes('--no-color');
 var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   process.platform === 'win32' ||
   process.argv.includes('--color') ||
-  (require('tty').isatty(1) && process.env.TERM !== 'dumb') ||
+  (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
   process.env.CI);
 
 function extend(fn, keys) {
-  if (global.Proxy) {
+  if (typeof globalThis === 'object' && globalThis.Proxy) {
     return new Proxy(fn, {
       get(target, key) {
         if (keys.includes(key)) throw new Error('The key of chain call cannot be repeated: ' + key);
