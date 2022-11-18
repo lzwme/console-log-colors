@@ -3,8 +3,6 @@
  */
 const clc = require('../');
 
-console.log(Object.keys(clc));
-
 clc.log.yellow('------------------------------------------');
 // simple examples
 const { color, red, green, cyan, log, enable, disable } = require('../');

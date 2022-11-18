@@ -11,7 +11,7 @@
 
 Console log colors helper for simple lightweight useage, no external dependencies. It supports use in Node.js and Browser(Since Chrome 69) environments.
 
-Please use [colorette](https://github.com/jorgebucaran/colorette) or [colors.js](https://github.com/Marak/colors.js) or [chalk](https://github.com/chalk/chalk) for complex requirements.
+Please use [colorette](https://github.com/jorgebucaran/colorette) or [chalk](https://github.com/chalk/chalk) for complex requirements.
 
 ## INSTALL
 
@@ -161,6 +161,41 @@ Object.keys(color.list).forEach(function (colorType) {
 * bgMagentaBright
 * bgCyanBright
 * bgWhiteBright
+
+## Benchmark
+
+```bash
+$ npm run benchmark
+```
+
+Output reference:
+
+```diff
+# All Colors
++ console-log-colors x 253,111 ops/sec ±0.70% (90 runs sampled)
+  ansi-colors x 133,279 ops/sec ±0.81% (88 runs sampled)
+  cli-color x 8,714 ops/sec ±0.69% (89 runs sampled)
+  picocolors x 637,233 ops/sec ±0.65% (87 runs sampled)
+  colorette x 220,125 ops/sec ±0.72% (90 runs sampled)
+  chalk x 380,768 ops/sec ±0.59% (89 runs sampled)
+  kleur x 529,787 ops/sec ±0.73% (90 runs sampled)
+
+# Chained colors
++ console-log-colors x 62,782 ops/sec ±0.69% (85 runs sampled)
+  ansi-colors x 17,313 ops/sec ±0.90% (87 runs sampled)
+  cli-color x 6,652 ops/sec ±0.72% (88 runs sampled)
+  chalk x 203,901 ops/sec ±0.76% (89 runs sampled)
+  kleur x 55,145 ops/sec ±0.90% (86 runs sampled)
+
+# Nested colors
++ console-log-colors x 121,535 ops/sec ±0.61% (90 runs sampled)
+  ansi-colors x 46,949 ops/sec ±0.70% (90 runs sampled)
+  cli-color x 3,858 ops/sec ±0.70% (90 runs sampled)
+  picocolors x 108,340 ops/sec ±0.67% (91 runs sampled)
+  colorette x 101,065 ops/sec ±0.76% (87 runs sampled)
+  chalk x 79,484 ops/sec ±0.59% (90 runs sampled)
+  kleur x 94,918 ops/sec ±0.59% (91 runs sampled))
+```
 
 ## License
 

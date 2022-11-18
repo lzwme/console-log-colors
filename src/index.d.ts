@@ -55,14 +55,13 @@ interface StyleFN extends Record<ColorList, StyleFN> {
 
 export const color: {
   (str: string, type: ColorList): string;
-  list: ColorList[];
+  list: Record<ColorList, [string, string]>;
 } & Record<ColorList, StyleFN>;
 
 export const log: Record<ColorList, (...args) => void> & {
   (str: string, type: ColorList): void;
 };
 
-export const colorList: ColorList[];
 export function isSupported(): boolean;
 export function enable(): boolean;
 export function disable(): boolean;
@@ -72,7 +71,6 @@ export = {
   ...color,
   color,
   log,
-  colorList,
   isSupported,
   enable,
   disable,

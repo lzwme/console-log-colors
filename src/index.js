@@ -72,15 +72,13 @@ function extend(fn, keys) {
   if (typeof globalThis === 'object' && globalThis.Proxy) {
     return new Proxy(fn, {
       get(target, key) {
-        if (!(key in colorList)) return;
-        if (keys.includes(key)) throw new Error('The key of chain call cannot be repeated: ' + key);
-        if (!target[key]) target[key] = extend(function(s) { return fn(color(s, key)) }, keys.concat(key));
+        // if (keys.includes(key)) return;
+        if (!target[key] && (key in colorList)) target[key] = extend(function(s) { return fn(color(s, key)) }, keys.concat(key));
         return target[key];
       }
     });
   }
   Object.keys(colorList).forEach(function (key) {
-    if (keys.includes(key)) return;
     Object.defineProperty(n, key, {
       get() { return extend(function m(s) { return fn(color(s, key)) }, keys.concat(key)) }
     });
@@ -91,15 +89,13 @@ function color(str, colorType) {
   if (str === '' || str === void 0) return '';
 
   var typecfg = colorList[colorType];
-  if (!isSupported || !typecfg) return str;
-
-  return '\x1b[' + typecfg[0] + 'm' + str + '\x1b[' + typecfg[1] + 'm';
+  return isSupported && typecfg ? '\x1b[' + typecfg[0] + str + '\x1b[' + typecfg[1] : str;
 }
 color.list = colorList;
 
 var clc = {
   color: color,
-  colorList: colorList,
+  list: colorList,
   log(str, colorType) { console.log(color(str, colorType)) },
   isSupported() { return isSupported },
   enable() { isSupported = true },
@@ -108,6 +104,7 @@ var clc = {
 };
 
 Object.keys(colorList).forEach(function (key) {
+  colorList[key] = colorList[key].map(function(val) { return val + 'm' });
   clc[key] = color[key] = extend(function (str) { return color(str, key) }, [key]);
   clc.log[key] = function () {
     var arr = [];
