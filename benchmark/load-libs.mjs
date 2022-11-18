@@ -13,7 +13,7 @@ cliColor.reset = cliColor.dim;
 cliColor.strikethrough = cliColor.strike;
 
 export const libs = {
-  'console-log-colors': clc,
+  clc,
   'ansi-colors': ansiColors,
   'cli-color': cliColor,
   picocolors,

@@ -72,45 +72,48 @@ function extend(fn, keys) {
   if (typeof globalThis === 'object' && globalThis.Proxy) {
     return new Proxy(fn, {
       get(target, key) {
-        // if (keys.includes(key)) return;
-        if (!target[key] && (key in colorList)) target[key] = extend(function(s) { return fn(color(s, key)) }, keys.concat(key));
+        if (!target[key] && (key in colorList)) target[key] = extend(function p(s) { return fn(color[key](s)) }, keys.concat(key));
         return target[key];
       }
     });
   }
   Object.keys(colorList).forEach(function (key) {
     Object.defineProperty(n, key, {
-      get() { return extend(function m(s) { return fn(color(s, key)) }, keys.concat(key)) }
+      get() { return extend(function m(s) { return fn(color[key](s)) }, keys.concat(key)) }
     });
   });
   return n;
 }
-function color(str, colorType) {
-  if (str === '' || str === void 0) return '';
-
-  var typecfg = colorList[colorType];
-  return isSupported && typecfg ? '\x1b[' + typecfg[0] + str + '\x1b[' + typecfg[1] : str;
+function getFn(colorType) {
+  var cfg = colorList[colorType];
+  if (!cfg || !isSupported) return String;
+  var open = cfg[0], close = cfg[1];
+  return function (str) {
+    // todo: support nested
+    return open + str + close;
+  }
 }
+function color(str, colorType) { return getFn(colorType)(str); }
 color.list = colorList;
-
+function init() {
+  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), [key]) });
+}
 var clc = {
   color: color,
   list: colorList,
   log(str, colorType) { console.log(color(str, colorType)) },
   isSupported() { return isSupported },
-  enable() { isSupported = true },
-  disable() { isSupported = false },
+  enable() { isSupported = true; init(); },
+  disable() { isSupported = false; init(); },
   strip(str) { return str.replace(/\x1b\[\d+m/gm, '') },
 };
-
 Object.keys(colorList).forEach(function (key) {
-  colorList[key] = colorList[key].map(function(val) { return val + 'm' });
-  clc[key] = color[key] = extend(function (str) { return color(str, key) }, [key]);
+  colorList[key] = colorList[key].map(function (n) { return '\x1b[' + n + 'm' });
   clc.log[key] = function () {
     var arr = [];
-    for (var i = 0; i < arguments.length; i++) arr.push(String(arguments[i]));
-    console.log(color(arr.join(' '), key));
+    for (var i = 0; i < arguments.length; i++) arr.push(arguments[i]);
+    console.log(color[key](arr.join(' ')));
   };
 });
-
+init();
 if (typeof module === 'object') module.exports = clc;

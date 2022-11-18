@@ -32,7 +32,7 @@ const names = [
 
 const cycle = (e, newline) => {
   process.stdout.write("\u001b[G");
-  process.stdout.write(`  ${e.target}` + (newline ? "\n" : ""));
+  process.stdout.write(`${e.target}` + (newline ? "\n" : ""));
 };
 
 function bench(desc, suiteFns, ignoreLibs = []) {
@@ -41,7 +41,8 @@ function bench(desc, suiteFns, ignoreLibs = []) {
   const helper = {
     run: suite.run.bind(suite),
     add(key, fn) {
-      suite.add(libs["console-log-colors"].cyanBright(key), {
+      const desc = key === 'clc' ? '+ console-log-colors' : `  ${key}`;
+      suite.add(libs.clc.cyanBright(desc.padEnd(20, ' ')), {
         onCycle: (e) => cycle(e),
         onComplete: (e) => cycle(e, true),
         onError: (e) => console.error(`[ERROR][${desc}][${key}]`, e.message || e),
@@ -64,7 +65,8 @@ bench("Chained colors", [(lib) => names.forEach((name) => lib[name].bold.underli
   .add("kleur", () => names.forEach((name) => libs.kleur[name]().bold().underline().italic("foo")))
   .run();
 
-bench("Nested colors", [(lib) => fixture(lib)]).run();
+// todo: support nested colors
+if (process.argv.slice(2).includes('nested')) bench("Nested colors", [(lib) => fixture(lib)]).run();
 
 function fixture(lib) {
   return lib.red(

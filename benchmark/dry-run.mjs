@@ -1,14 +1,13 @@
 import { libs } from "./load-libs.mjs";
 
 const shortNames = {
-  clc:  "console-log-colors",
+  clc: "console-log-colors",
   ansi: "ansi-colors",
-  cli:  "cli-color",
+  cli: "cli-color",
 };
 
 function dryRun(key = process.argv[2] || "clc") {
-  if (shortNames[key]) key = shortNames[key];
-  console.log(`\n# ${key}\n`);
+  console.log(`\n# ${shortNames[key] || key}\n`);
 
   const color = libs[key];
 
