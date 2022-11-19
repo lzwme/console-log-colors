@@ -68,21 +68,21 @@ var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
   process.env.CI);
 
-function extend(fn, keys) {
-  if (typeof globalThis === 'object' && globalThis.Proxy) {
+function extend(fn, useProxy) {
+  if (useProxy && typeof globalThis === 'object' && globalThis.Proxy) {
     return new Proxy(fn, {
       get(target, key) {
-        if (!target[key] && (key in colorList)) target[key] = extend(function p(s) { return fn(color[key](s)) }, keys.concat(key));
+        if (!target[key] && (key in colorList)) target[key] = extend(function p(s) { return fn(color[key](s)) }, true);
         return target[key];
       }
     });
   }
   Object.keys(colorList).forEach(function (key) {
-    Object.defineProperty(n, key, {
-      get() { return extend(function m(s) { return fn(color[key](s)) }, keys.concat(key)) }
+    Object.defineProperty(fn, key, { // Reflect.defineProperty
+      get() { return extend(function m(s) { return fn(color[key](s)) }, true) }
     });
   });
-  return n;
+  return fn;
 }
 function replaceClose(str, open, close, idx) {
   var start = str.substring(0, idx) + open;
@@ -92,7 +92,7 @@ function replaceClose(str, open, close, idx) {
 }
 function getFn(colorType) {
   var cfg = colorList[colorType];
-  if (!cfg || !isSupported) return String;
+  if (!cfg || !isSupported) return (str) => String(str);
   var open = cfg[0], close = cfg[1];
   return function (str) {
     if (str === '' || str == null) return '';
@@ -104,7 +104,7 @@ function getFn(colorType) {
 function color(str, colorType) { return getFn(colorType)(str); }
 color.list = colorList;
 function init() {
-  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), [key]) });
+  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), false) });
 }
 var clc = {
   color: color,

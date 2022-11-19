@@ -198,8 +198,8 @@ Output reference:
 
 ## References
 
-- [chalk](https://github.com/chalk/chalk)
 - [colors.js](https://github.com/Marak/colors.js)
+- [chalk](https://github.com/chalk/chalk)
 - [ansi-colors](https://github.com/doowb/ansi-colors)
 - [colorette](https://github.com/jorgebucaran/colorette)
 - [cli-color](https://github.com/medikoo/cli-color)
