@@ -84,13 +84,21 @@ function extend(fn, keys) {
   });
   return n;
 }
+function replaceClose(str, open, close, idx) {
+  var start = str.substring(0, idx) + open;
+  var rest = str.substring(idx + close.length);
+  var nextIdx = rest.indexOf(close);
+  return start + (~nextIdx ? replaceClose(rest, open, close, nextIdx) : rest);
+}
 function getFn(colorType) {
   var cfg = colorList[colorType];
   if (!cfg || !isSupported) return String;
   var open = cfg[0], close = cfg[1];
   return function (str) {
-    // todo: support nested
-    return open + str + close;
+    if (str === '' || str == null) return '';
+    str = '' + str;
+    var idx = str.indexOf(close, open.length);
+    return open + ( ~idx ? replaceClose(str, open, close, idx) : str) + close;
   }
 }
 function color(str, colorType) { return getFn(colorType)(str); }

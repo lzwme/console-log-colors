@@ -7,7 +7,7 @@ const shortNames = {
 };
 
 function dryRun(key = process.argv[2] || "clc") {
-  console.log(`\n# ${shortNames[key] || key}\n`);
+  console.log(`\n# ${shortNames[key] || key} `.padEnd(60, '-'), '\n');
 
   const color = libs[key];
 

@@ -65,8 +65,7 @@ bench("Chained colors", [(lib) => names.forEach((name) => lib[name].bold.underli
   .add("kleur", () => names.forEach((name) => libs.kleur[name]().bold().underline().italic("foo")))
   .run();
 
-// todo: support nested colors
-if (process.argv.slice(2).includes('nested')) bench("Nested colors", [(lib) => fixture(lib)]).run();
+bench("Nested colors", [(lib) => fixture(lib)]).run();
 
 function fixture(lib) {
   return lib.red(
