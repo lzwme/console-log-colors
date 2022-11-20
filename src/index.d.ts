@@ -1,71 +1,71 @@
 type ColorList =
-  | "reset"
-  | "bold"
-  | "dim"
-  | "italic"
-  | "underline"
-  | "inverse"
-  | "hidden"
-  | "strikethrough"
-  | "black"
-  | "red"
-  | "green"
-  | "yellow"
-  | "blue"
-  | "magenta"
-  | "cyan"
-  | "white"
-  | "gray"
-  | "grey"
-  | "redBright"
-  | "greenBright"
-  | "yellowBright"
-  | "blueBright"
-  | "magentaBright"
-  | "cyanBright"
-  | "whiteBright"
-  | "bgBlack"
-  | "bgRed"
-  | "bgGreen"
-  | "bgYellow"
-  | "bgBlue"
-  | "bgMagenta"
-  | "bgCyan"
-  | "bgWhite"
-  | "blackBG"
-  | "redBG"
-  | "greenBG"
-  | "yellowBG"
-  | "blueBG"
-  | "magentaBG"
-  | "cyanBG"
-  | "whiteBG"
-  | "bgBlackBright"
-  | "bgRedBright"
-  | "bgGreenBright"
-  | "bgYellowBright"
-  | "bgBlueBright"
-  | "bgMagentaBright"
-  | "bgCyanBright"
-  | "bgWhiteBright";
+  | 'reset'
+  | 'bold'
+  | 'dim'
+  | 'italic'
+  | 'underline'
+  | 'inverse'
+  | 'hidden'
+  | 'strikethrough'
+  | 'black'
+  | 'red'
+  | 'green'
+  | 'yellow'
+  | 'blue'
+  | 'magenta'
+  | 'cyan'
+  | 'white'
+  | 'gray'
+  | 'grey'
+  | 'redBright'
+  | 'greenBright'
+  | 'yellowBright'
+  | 'blueBright'
+  | 'magentaBright'
+  | 'cyanBright'
+  | 'whiteBright'
+  | 'bgBlack'
+  | 'bgRed'
+  | 'bgGreen'
+  | 'bgYellow'
+  | 'bgBlue'
+  | 'bgMagenta'
+  | 'bgCyan'
+  | 'bgWhite'
+  | 'blackBG'
+  | 'redBG'
+  | 'greenBG'
+  | 'yellowBG'
+  | 'blueBG'
+  | 'magentaBG'
+  | 'cyanBG'
+  | 'whiteBG'
+  | 'bgBlackBright'
+  | 'bgRedBright'
+  | 'bgGreenBright'
+  | 'bgYellowBright'
+  | 'bgBlueBright'
+  | 'bgMagentaBright'
+  | 'bgCyanBright'
+  | 'bgWhiteBright';
 
 interface StyleFN extends Record<ColorList, StyleFN> {
-  (s: string): string;
+  (str: unknown): string;
 }
 
-export const color: {
-  (str: string, type: ColorList): string;
+declare const color: {
+  (str: unknown, type: ColorList): string;
   list: Record<ColorList, [string, string]>;
 } & Record<ColorList, StyleFN>;
 
-export const log: Record<ColorList, (...args) => void> & {
-  (str: string, type: ColorList): void;
+declare const log: Record<ColorList, (...args) => void> & {
+  (str: string | number | symbol, type: ColorList): void;
 };
 
-export function isSupported(): boolean;
-export function enable(): boolean;
-export function disable(): boolean;
-export function strip(str: string): string;
+declare function isSupported(): boolean;
+declare function enable(): boolean;
+declare function disable(): boolean;
+declare function strip(str: string): string;
 
 export = {
   ...color,

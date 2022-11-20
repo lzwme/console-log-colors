@@ -1,12 +1,12 @@
 // node --experimental-specifier-resolution=node examples/esm-test.mjs
 
-import clc from '../src/esm.js';
+import { red, log, color } from '../src/esm.mjs';
 // import { color } from '../';
 
-console.log(Object.keys(clc));
+console.log(Object.keys(color));
 // console.log(color.green('green'));
 // clc.log.greenBright('log.greenBright');
-// console.log(import.meta, exports)
-console.log(clc.red('red'));
-console.log(clc.color.red('color.red'));
-console.log(clc.log.red('log.red'));
+console.log(import.meta);
+console.log(red('red'));
+console.log(color.red('color.red'));
+console.log(log.red('log.red'));

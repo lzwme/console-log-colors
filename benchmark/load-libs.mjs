@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import clc from '../src/esm.js';
+import clc from '../src/esm.mjs';
 import ansiColors from 'ansi-colors';
 import * as colorette from 'colorette';
 import cliColor from 'cli-color';

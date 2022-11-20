@@ -1,0 +1,68 @@
+import clc from './index.js';
+
+export const {
+  log,
+  color,
+  list,
+  isSupported,
+  disable,
+  enable,
+  strip,
+  // modifier
+  reset,
+  bold,
+  dim,
+  italic,
+  underline,
+  inverse,
+  hidden,
+  strikethrough,
+  black,
+  // color
+  red,
+  green,
+  yellow,
+  blue,
+  magenta,
+  cyan,
+  white,
+  gray,
+  grey,
+  // Bright color
+  redBright,
+  greenBright,
+  yellowBright,
+  blueBright,
+  magentaBright,
+  cyanBright,
+  whiteBright,
+  // bgColor
+  bgBlack,
+  bgRed,
+  bgGreen,
+  bgYellow,
+  bgBlue,
+  bgMagenta,
+  bgCyan,
+  bgWhite,
+  // bgColor - legacy styles
+  blackBG,
+  redBG,
+  greenBG,
+  yellowBG,
+  blueBG,
+  magentaBG,
+  cyanBG,
+  whiteBG,
+  // Bright bgColor
+  bgBlackBright,
+  bgRedBright,
+  bgGreenBright,
+  bgYellowBright,
+  bgBlueBright,
+  bgMagentaBright,
+  bgCyanBright,
+  bgWhiteBright,
+} = clc;
+
+export default clc;

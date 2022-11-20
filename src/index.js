@@ -8,7 +8,6 @@ var colorList = {
   inverse: [7, 27],
   hidden: [8, 28],
   strikethrough: [9, 29],
-
   // color
   black: [30, 39],
   red: [31, 39],
@@ -20,7 +19,6 @@ var colorList = {
   white: [37, 39],
   gray: [90, 39],
   grey: [90, 39],
-
   // Bright color
   redBright: [91, 39],
   greenBright: [92, 39],
@@ -29,7 +27,6 @@ var colorList = {
   magentaBright: [95, 39],
   cyanBright: [96, 39],
   whiteBright: [97, 39],
-
   // bgColor
   bgBlack: [40, 49],
   bgRed: [41, 49],
@@ -39,7 +36,6 @@ var colorList = {
   bgMagenta: [45, 49],
   bgCyan: [46, 49],
   bgWhite: [47, 49],
-
   // bgColor - legacy styles
   blackBG: [40, 49],
   redBG: [41, 49],
@@ -49,7 +45,6 @@ var colorList = {
   magentaBG: [45, 49],
   cyanBG: [46, 49],
   whiteBG: [47, 49],
-
   // Bright bgColor
   bgBlackBright: [100, 49],
   bgRedBright: [101, 49],
@@ -67,9 +62,9 @@ var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   process.argv.includes('--color') ||
   (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
   process.env.CI);
-
-function extend(fn, useProxy) {
-  if (useProxy && typeof globalThis === 'object' && globalThis.Proxy) {
+var TObject = typeof Reflect === 'undefined' ? Object : Reflect;
+function extend(fn, useGetter) {
+  if (useGetter && typeof Proxy !== 'undefined') {
     return new Proxy(fn, {
       get(target, key) {
         if (!target[key] && (key in colorList)) target[key] = extend(function p(s) { return fn(color[key](s)) }, true);
@@ -78,9 +73,11 @@ function extend(fn, useProxy) {
     });
   }
   Object.keys(colorList).forEach(function (key) {
-    Object.defineProperty(fn, key, { // Reflect.defineProperty
-      get() { return extend(function m(s) { return fn(color[key](s)) }, true) }
-    });
+    if (useGetter) {
+      TObject.defineProperty(fn, key, {
+        get() { return extend(function m(s) { return fn(color[key](s)) }, true) }
+      });
+    } else if (!fn[key]) fn[key] = extend(function m(s) { return fn(color[key](s)) }, true);
   });
   return fn;
 }
@@ -92,13 +89,13 @@ function replaceClose(str, open, close, idx) {
 }
 function getFn(colorType) {
   var cfg = colorList[colorType];
-  if (!cfg || !isSupported) return (str) => String(str);
+  if (!cfg || !isSupported) return function (str) { return String(str) };
   var open = cfg[0], close = cfg[1];
   return function (str) {
     if (str === '' || str == null) return '';
     str = '' + str;
     var idx = str.indexOf(close, open.length);
-    return open + ( ~idx ? replaceClose(str, open, close, idx) : str) + close;
+    return open + (~idx ? replaceClose(str, open, close, idx) : str) + close;
   }
 }
 function color(str, colorType) { return getFn(colorType)(str); }

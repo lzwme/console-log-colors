@@ -9,7 +9,7 @@
 [![GitHub forks][forks-badge]][forks-url]
 [![GitHub stars][stars-badge]][stars-url]
 
-Console log colors helper for simple lightweight useage, no external dependencies. It supports use in Node.js and Browser(Since Chrome 69) environments.
+Console log colors helper for simple lightweight useage. No external dependencies. It supports use in Node.js and Browser(Since Chrome 69) environments.
 
 Please use [chalk](https://github.com/chalk/chalk) for complex requirements.
 
@@ -171,29 +171,30 @@ $ npm run benchmark
 Output reference:
 
 ```diff
-+ console-log-colors x 455,528 ops/sec ±0.87% (90 runs sampled)
-  ansi-colors        x 128,272 ops/sec ±0.70% (88 runs sampled)
-  cli-color          x 8,448 ops/sec ±1.00% (86 runs sampled)
-  picocolors         x 611,425 ops/sec ±0.73% (87 runs sampled)
-  colorette          x 213,588 ops/sec ±0.67% (85 runs sampled)
-  chalk              x 365,556 ops/sec ±0.61% (88 runs sampled)
-  kleur              x 517,587 ops/sec ±0.74% (90 runs sampled)
+# All Colors
++ console-log-colors x 1,773,905 ops/sec ±0.65% (91 runs sampled)
+  ansi-colors        x 153,603 ops/sec ±0.92% (93 runs sampled)
+  cli-color          x 35,879 ops/sec ±0.71% (94 runs sampled)
+  picocolors         x 692,485 ops/sec ±0.92% (91 runs sampled)
+  colorette          x 215,972 ops/sec ±0.92% (89 runs sampled)
+  chalk              x 361,315 ops/sec ±3.65% (90 runs sampled))
+  kleur              x 485,399 ops/sec ±0.80% (93 runs sampled)
 
 # Chained colors
-+ console-log-colors x 45,787 ops/sec ±0.76% (84 runs sampled)
-  ansi-colors        x 16,285 ops/sec ±1.15% (85 runs sampled)
-  cli-color          x 6,347 ops/sec ±0.83% (88 runs sampled)
-  chalk              x 203,046 ops/sec ±0.55% (90 runs sampled)
-  kleur              x 51,088 ops/sec ±0.79% (86 runs sampled)
++ console-log-colors x 60,202 ops/sec ±0.79% (94 runs sampled)
+  ansi-colors        x 14,001 ops/sec ±7.89% (83 runs sampled))
+  cli-color          x 14,339 ops/sec ±0.89% (90 runs sampled)
+  chalk              x 179,431 ops/sec ±0.97% (90 runs sampled)
+  kleur              x 62,768 ops/sec ±0.88% (91 runs sampled)
 
 # Nested colors
-+ console-log-colors x 88,260 ops/sec ±0.55% (89 runs sampled)
-  ansi-colors        x 46,112 ops/sec ±0.76% (90 runs sampled)
-  cli-color          x 3,667 ops/sec ±0.69% (88 runs sampled)
-  picocolors         x 103,690 ops/sec ±0.71% (90 runs sampled)
-  colorette          x 97,951 ops/sec ±0.78% (89 runs sampled)
-  chalk              x 74,527 ops/sec ±0.88% (89 runs sampled)
-  kleur              x 90,129 ops/sec ±0.71% (89 runs sampled)
++ console-log-colors x 101,060 ops/sec ±0.93% (89 runs sampled)
+  ansi-colors        x 34,329 ops/sec ±11.88% (73 runs sampled)
+  cli-color          x 12,013 ops/sec ±1.58% (89 runs sampled)
+  picocolors         x 100,250 ops/sec ±0.71% (93 runs sampled)
+  colorette          x 93,476 ops/sec ±0.94% (89 runs sampled))
+  chalk              x 71,938 ops/sec ±1.02% (90 runs sampled)
+  kleur              x 87,196 ops/sec ±0.80% (91 runs sampled)
 ```
 
 ## References

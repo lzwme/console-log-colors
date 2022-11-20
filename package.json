@@ -9,9 +9,14 @@
   "bugs": {
     "url": "https://github.com/lzwme/console-log-colors/issues"
   },
-  "main": "src/index.js",
-  "module": "src/esm.js",
+  "exports": {
+    "types": "./src/index.d.ts",
+    "require":  "./src/index.js",
+    "import": "./src/esm.mjs"
+  },
   "types": "src/index.d.ts",
+  "main": "src/index.js",
+  "module": "src/esm.mjs",
   "keywords": [
     "terminal",
     "command-line",
