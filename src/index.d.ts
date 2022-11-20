@@ -53,26 +53,23 @@ interface StyleFN extends Record<ColorList, StyleFN> {
   (str: unknown): string;
 }
 
-export declare const color: {
+interface Color extends Record<ColorList, StyleFN> {
   (str: unknown, type: ColorList): string;
   list: Record<ColorList, [string, string]>;
-} & Record<ColorList, StyleFN>;
+}
 
-export declare const log: Record<ColorList, (...args) => void> & {
-  (str: string | number | symbol, type: ColorList): void;
-};
+declare interface CLC extends Record<ColorList, StyleFN> {
+  color: Color;
+  log: Record<ColorList, (...args) => void> & {
+    (str: string | number | symbol, type: ColorList): void;
+  };
+  isSupported(): boolean;
+  enable(): boolean;
+  disable(): boolean;
+  strip(str: string): string;
+}
 
-export declare function isSupported(): boolean;
-export declare function enable(): boolean;
-export declare function disable(): boolean;
-export declare function strip(str: string): string;
+declare const clc: CLC;
 
-export = {
-  ...color,
-  color,
-  log,
-  isSupported,
-  enable,
-  disable,
-  strip,
-};
+export = clc;
+// export default clc;
