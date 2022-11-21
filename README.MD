@@ -162,7 +162,7 @@ Object.keys(color.list).forEach(function (colorType) {
 * bgCyanBright
 * bgWhiteBright
 
-## Benchmark
+## Benchmarks
 
 ```bash
 $ npm run benchmark

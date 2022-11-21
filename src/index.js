@@ -63,29 +63,24 @@ var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
   (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
   process.env.CI);
 var TObject = typeof Reflect === 'undefined' ? Object : Reflect;
-function extend(fn, useGetter) {
-  if (useGetter && typeof Proxy !== 'undefined') {
-    return new Proxy(fn, {
-      get(target, key) {
-        if (!target[key] && (key in colorList)) target[key] = extend(function p(s) { return fn(color[key](s)) }, true);
-        return target[key];
-      }
-    });
-  }
+var fncache = {};
+function extend(fn, keys) {
+  var prefix = keys.join('');
   Object.keys(colorList).forEach(function (key) {
-    if (useGetter) {
+      var cachekey = prefix + key;
       TObject.defineProperty(fn, key, {
-        get() { return extend(function m(s) { return fn(color[key](s)) }, true) }
+        get() { 
+          if (!fncache[cachekey]) fncache[cachekey] = extend(function m(s) { return fn(color[key](s)) }, keys.concat(key));
+          return fncache[cachekey];
+         }
       });
-    } else if (!fn[key]) fn[key] = extend(function m(s) { return fn(color[key](s)) }, true);
   });
   return fn;
 }
 function replaceClose(str, open, close, idx) {
-  var start = str.substring(0, idx) + open;
   var rest = str.substring(idx + close.length);
   var nextIdx = rest.indexOf(close);
-  return start + (~nextIdx ? replaceClose(rest, open, close, nextIdx) : rest);
+  return str.substring(0, idx) + open + (~nextIdx ? replaceClose(rest, open, close, nextIdx) : rest);
 }
 function getFn(colorType) {
   var cfg = colorList[colorType];
@@ -101,7 +96,7 @@ function getFn(colorType) {
 function color(str, colorType) { return getFn(colorType)(str); }
 color.list = colorList;
 function init() {
-  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), false) });
+  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), [key]) });
 }
 var clc = {
   color: color,
