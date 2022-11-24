@@ -36,12 +36,6 @@ console.log(color('This is a green string!', 'green'));
 // chained styles
 console.log(cyan.bgRed.bold.underline('Hello world!'));
 
-try {
-  cyan.bold.cyan('Should throw Error');
-} catch(e) {
-  console.log(String(e.message).includes('cyan'), e.message);
-}
-
 // log
 log('This is a green string!', 'green');
 log.green('This is a green string!', 'This is a green string!');
@@ -65,6 +59,16 @@ import { cyan } from 'console-log-colors';
 
 console.log(cyan.bgRed.bold.underline('Hello world!'));
 console.log(bold.cyan.bgRed.underline('Hello world!'));
+```
+
+### Nested
+
+```js
+import { red, white, gray } from 'console-log-colors';
+
+console.log(
+  red(`a red ${white('white')} red ${red('red')} red ${gray('gray')} red ${red('red')} red ${red('red')}`)
+);
 ```
 
 ### `color[color type](string)`

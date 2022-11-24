@@ -15,12 +15,6 @@ console.log(color('This is a green string!', 'green'));
 // chained styles
 console.log(cyan.bgRed.bold.underline('Hello world!'));
 
-try {
-  cyan.bold.cyan('Should throw Error');
-} catch(e) {
-  console.log(String(e.message).includes('cyan'), e.message);
-}
-
 // log
 log('This is a green string!', 'green');
 log.green('This is a green string!', 'This is a green string!');
