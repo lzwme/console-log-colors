@@ -76,3 +76,27 @@ log.green('[green]color support enabled:', clc.isSupported());
 
 const redstr = clc.red('redstr');
 console.log('colored:', redstr, ' =>  striped:', clc.strip(redstr));
+
+console.log('Nested:', fixture(color));
+
+function fixture(lib) {
+  return lib.red(
+    `a red ${lib.white('red')} red ${lib.red('red')} red ${lib.gray('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.red('red')} red ${lib.blue('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')}red ${lib.c129('c129')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.bg129('bg129')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.red('red')}red ${lib.green('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.magenta('red')} red ${lib.red('red')}red ${lib.red('red')} red ${lib.cyan('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.yellow('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red(
+      'red'
+    )} red ${lib.red('red')} red ${lib.red('red')} red ${lib.red('red')} message`
+  );
+}

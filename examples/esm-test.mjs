@@ -17,3 +17,4 @@ console.log(color.bg129('bg129'));
 console.log(color.bg129(color.c250('bg129-c250')));
 console.log(color.bg129.c250('bg129 - c250'));
 console.log(color.c250.bg129('c250-bg129'));
+console.log(color.c250.bg129.underline.italic(' ANSI256: color 250 and background 129 '));
