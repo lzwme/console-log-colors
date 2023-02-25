@@ -71,6 +71,18 @@ console.log(
 );
 ```
 
+### ANSI256
+
+Support ansi256 colors. For example:
+
+```js
+import { c250 } from 'console-log-colors';
+
+console.log(c250.bg129(' ANSI256: color 250 and background 129 '));
+```
+
+## API
+
 ### `color[color type](string)`
 
 ```js
@@ -165,6 +177,11 @@ Object.keys(color.list).forEach(function (colorType) {
 * bgMagentaBright
 * bgCyanBright
 * bgWhiteBright
+
+`ANSI256`:
+
+- `c<0~255>`
+- `bg<0~255>`
 
 ## Benchmarks
 

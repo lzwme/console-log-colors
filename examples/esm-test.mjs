@@ -9,4 +9,11 @@ console.log(Object.keys(color));
 console.log(import.meta);
 console.log(red('red'));
 console.log(color.red('color.red'));
-console.log(log.red('log.red'));
+log.red('log.red');
+
+// ansi256
+console.log(color.c250('c250'));
+console.log(color.bg129('bg129'));
+console.log(color.bg129(color.c250('bg129-c250')));
+console.log(color.bg129.c250('bg129 - c250'));
+console.log(color.c250.bg129('c250-bg129'));

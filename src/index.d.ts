@@ -1,3 +1,9 @@
+type ComputeRange<N extends number, Result extends Array<unknown> = []> = Result['length'] extends N
+  ? Result
+  : ComputeRange<N, [...Result, Result['length']]>;
+
+type Octal256 = ComputeRange<256>[number]; // 0 - 255
+
 type ColorList =
   | 'reset'
   | 'bold'
@@ -47,7 +53,9 @@ type ColorList =
   | 'bgBlueBright'
   | 'bgMagentaBright'
   | 'bgCyanBright'
-  | 'bgWhiteBright';
+  | 'bgWhiteBright'
+  | `c${Octal256}`
+  | `bg${Octal256}`;
 
 interface StyleFN extends Record<ColorList, StyleFN> {
   (str: unknown): string;

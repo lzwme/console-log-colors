@@ -90,7 +90,7 @@ function getFn(colorType) {
     if (str === '' || str == null) return '';
     str = '' + str;
     var idx = str.indexOf(close, open.length);
-    return open + (~idx ? replaceClose(str, open, close, idx) : str) + close;
+    return open + (idx > -1 && idx < str.length - 1 ? replaceClose(str, open, close, idx) : str) + close;
   }
 }
 function color(str, colorType) { return getFn(colorType)(str); }
@@ -107,6 +107,10 @@ var clc = {
   disable() { isSupported = false; init(); },
   strip(str) { return str.replace(/\x1b\[\d+m/gm, '') },
 };
+for (var i = 0; i < 256; i++) {
+  colorList['c' + i] = ['38;5;' + i, 0];
+  colorList['bg' + i] = ['48;5;' + i, 0];
+}
 Object.keys(colorList).forEach(function (key) {
   colorList[key] = colorList[key].map(function (n) { return '\x1b[' + n + 'm' });
   clc.log[key] = function () {
