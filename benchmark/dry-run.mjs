@@ -7,9 +7,14 @@ const shortNames = {
 };
 
 function dryRun(key = process.argv[2] || "clc") {
-  console.log(`\n# ${shortNames[key] || key} `.padEnd(60, '-'), '\n');
+  const color = libs[key] || libs[shortNames[key]];
 
-  const color = libs[key];
+  if (!color) {
+    console.error(`Not support for ${libs.clc.red(key)}!`);
+    return;
+  }
+
+  console.log(`\n# [${libs.clc.cyanBright(`dry-run`)}] ${shortNames[key] || key} `.padEnd(60, '-'), '\n');
 
   console.log("bgBlack:", color.bgBlack("some string"));
   console.log("bgBlue:", color.bgBlue("some string"));

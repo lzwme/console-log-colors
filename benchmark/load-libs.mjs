@@ -5,6 +5,8 @@ import * as colorette from 'colorette';
 import cliColor from 'cli-color';
 import kleur from 'kleur';
 import picocolors from 'picocolors';
+import * as yoctocolors from 'yoctocolors';
+import * as kolorist from 'kolorist';
 
 cliColor.gray = cliColor.white;
 cliColor.dim = cliColor.strike;
@@ -20,4 +22,6 @@ export const libs = {
   colorette,
   chalk,
   kleur,
+  yoctocolors,
+  kolorist,
 };

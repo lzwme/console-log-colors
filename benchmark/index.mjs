@@ -65,12 +65,19 @@ if (argv.length === 0) Object.keys(tasks).forEach(key => (tasks[key] = true));
 
 if (tasks.all) bench('All Colors', [lib => names.forEach(name => lib[name]('foot'))]).run();
 
-if (tasks.chain)
-  bench('Chained colors', [lib => names.forEach(name => lib[name].bold.underline.italic('foo'))], ['colorette', 'kleur', 'picocolors'])
+if (tasks.chain) {
+  bench(
+    'Chained colors',
+    [lib => names.forEach(name => lib[name].bold.underline.italic('foo'))],
+    ['colorette', 'kleur', 'picocolors', 'yoctocolors', 'kolorist']
+  )
     .add('kleur', () => names.forEach(name => libs.kleur[name]().bold().underline().italic('foo')))
     .run();
+}
 
-if (tasks.nest) bench('Nested colors', [lib => fixture(lib)]).run();
+if (tasks.nest) {
+  bench('Nested colors', [lib => fixture(lib)], ['yoctocolors']).run();
+}
 
 function fixture(lib) {
   return lib.red(

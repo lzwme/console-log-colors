@@ -193,29 +193,32 @@ Output reference:
 
 ```diff
 # All Colors
-+ console-log-colors x 1,773,905 ops/sec ±0.65% (91 runs sampled)
-  ansi-colors        x 153,603 ops/sec ±0.92% (93 runs sampled)
-  cli-color          x 35,879 ops/sec ±0.71% (94 runs sampled)
-  picocolors         x 692,485 ops/sec ±0.92% (91 runs sampled)
-  colorette          x 215,972 ops/sec ±0.92% (89 runs sampled)
-  chalk              x 361,315 ops/sec ±3.65% (90 runs sampled))
-  kleur              x 485,399 ops/sec ±0.80% (93 runs sampled)
++ console-log-colors x 1,713,611 ops/sec ±1.35% (88 runs sampled))
+  ansi-colors        x 361,503 ops/sec ±1.15% (89 runs sampled))
+  cli-color          x 61,993 ops/sec ±1.53% (91 runs sampled)
+  picocolors         x 1,458,754 ops/sec ±1.14% (90 runs sampled)
+  colorette          x 441,998 ops/sec ±1.19% (92 runs sampled)
+  chalk              x 922,968 ops/sec ±1.30% (91 runs sampled)d)
+  kleur              x 1,162,681 ops/sec ±1.46% (87 runs sampled)
+  yoctocolors        x 345,921 ops/sec ±1.07% (91 runs sampled)
+  kolorist           x 345,567 ops/sec ±0.69% (93 runs sampled)
 
 # Chained colors
-+ console-log-colors x 60,202 ops/sec ±0.79% (94 runs sampled)
-  ansi-colors        x 14,001 ops/sec ±7.89% (83 runs sampled))
-  cli-color          x 14,339 ops/sec ±0.89% (90 runs sampled)
-  chalk              x 179,431 ops/sec ±0.97% (90 runs sampled)
-  kleur              x 62,768 ops/sec ±0.88% (91 runs sampled)
++ console-log-colors x 105,119 ops/sec ±2.13% (92 runs sampled))
+  ansi-colors        x 36,412 ops/sec ±1.31% (91 runs sampled)
+  cli-color          x 28,733 ops/sec ±1.10% (90 runs sampled)
+  chalk              x 479,833 ops/sec ±0.82% (93 runs sampled)
+  kleur              x 74,308 ops/sec ±2.06% (75 runs sampled))
 
 # Nested colors
-+ console-log-colors x 101,060 ops/sec ±0.93% (89 runs sampled)
-  ansi-colors        x 34,329 ops/sec ±11.88% (73 runs sampled)
-  cli-color          x 12,013 ops/sec ±1.58% (89 runs sampled)
-  picocolors         x 100,250 ops/sec ±0.71% (93 runs sampled)
-  colorette          x 93,476 ops/sec ±0.94% (89 runs sampled))
-  chalk              x 71,938 ops/sec ±1.02% (90 runs sampled)
-  kleur              x 87,196 ops/sec ±0.80% (91 runs sampled)
++ console-log-colors x 193,483 ops/sec ±1.20% (88 runs sampled)
+  ansi-colors        x 97,122 ops/sec ±1.21% (89 runs sampled))
+  cli-color          x 25,077 ops/sec ±0.97% (93 runs sampled)
+  picocolors         x 191,207 ops/sec ±1.22% (86 runs sampled)
+  colorette          x 179,415 ops/sec ±1.37% (88 runs sampled)
+  chalk              x 136,924 ops/sec ±1.04% (90 runs sampled)
+  kleur              x 166,470 ops/sec ±1.23% (87 runs sampled)
+  kolorist           x 150,592 ops/sec ±1.33% (90 runs sampled)
 ```
 
 ## References
