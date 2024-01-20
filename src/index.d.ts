@@ -68,7 +68,7 @@ interface Color extends Record<ColorList, StyleFN> {
 
 declare interface CLC extends Record<ColorList, StyleFN> {
   color: Color;
-  log: Record<ColorList, (...args) => void> & {
+  log: Record<ColorList, (...args: any[]) => void> & {
     (str: string | number | symbol, type: ColorList): void;
   };
   isSupported(): boolean;
