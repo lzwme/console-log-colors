@@ -55,25 +55,33 @@ var colorList = {
   bgCyanBright: [106, 49],
   bgWhiteBright: [107, 49],
 };
-if (typeof process === 'undefined' || !process.env) { var process = { env: {}, argv: ['--color'] }; }
+var c256List = {};
+if (typeof process === 'undefined' || !process.env) { globalThis.process = { env: {}, argv: ['--color'] }; }
+var isLowMemory = process.env.CLC_LOW_MEMORY == '1';
+var isC256Disabled = process.env.CLC_C256 == '0';
 var isDisabled = process.env.NO_COLOR || process.argv.includes('--no-color');
 var isSupported = !isDisabled && (process.env.FORCE_COLOR ||
-  process.platform === 'win32' ||
-  process.argv.includes('--color') ||
-  (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
-  process.env.CI);
+    process.platform === 'win32' ||
+    process.argv.includes('--color') ||
+    (eval(`require('tty')`).isatty(1) && process.env.TERM !== 'dumb') ||
+    process.env.CI);
 var TObject = typeof Reflect === 'undefined' ? Object : Reflect;
 var fncache = {};
 function extend(fn, keys) {
   var prefix = keys.join('');
-  Object.keys(colorList).forEach(function (key) {
-      var cachekey = prefix + key;
-      TObject.defineProperty(fn, key, {
-        get() { 
-          if (!fncache[cachekey]) fncache[cachekey] = extend(function m(s) { return fn(color[key](s)) }, keys.concat(key));
-          return fncache[cachekey];
-         }
-      });
+  Object.keys(clc.list).forEach(function (key) {
+    // if (keys.indexOf(key) !== -1) return;
+    var cachekey = prefix + key;
+    TObject.defineProperty(fn, key, {
+      get() {
+        if (!fncache[cachekey]) {
+          fncache[cachekey] = extend(function m(s) {
+            return fn(color[key](s));
+          }, keys.concat(key));
+        }
+        return fncache[cachekey];
+      },
+    });
   });
   return fn;
 }
@@ -82,37 +90,81 @@ function replaceClose(str, open, close, idx) {
   var nextIdx = rest.indexOf(close);
   return str.substring(0, idx) + open + (~nextIdx ? replaceClose(rest, open, close, nextIdx) : rest);
 }
+function toString(s) {
+  return s;
+}
 function getFn(colorType) {
-  var cfg = colorList[colorType];
-  if (!cfg || !isSupported) return function (str) { return String(str) };
-  var open = cfg[0], close = cfg[1];
+  var cfg = clc.list[colorType];
+  if (!cfg || !isSupported) return toString;
+  var open = cfg[0],
+    close = cfg[1];
   return function (str) {
     if (str === '' || str == null) return '';
     str = '' + str;
     var idx = str.indexOf(close, open.length);
     return open + (idx > -1 && idx < str.length - 1 ? replaceClose(str, open, close, idx) : str) + close;
-  }
+  };
 }
 function color(str, colorType) { return getFn(colorType)(str); }
-color.list = colorList;
 function init() {
-  Object.keys(colorList).forEach(function (key) { clc[key] = color[key] = extend(getFn(key), [key]) });
+  var cache = {};
+  if (!isLowMemory) {
+    Object.keys(colorList).forEach(function (key) {
+      clc[key] = color[key] = extend(getFn(key), [key]);
+    });
+  }
+  Object.keys(clc.list).forEach(function (key) {
+    if (!color[key]) {
+      Object.defineProperty(color, key, {
+        get() {
+          if (!cache[key]) cache[key] = extend(getFn(key), [key]);
+          return cache[key];
+        },
+      });
+    }
+
+    if (!clc[key]) {
+      Object.defineProperty(clc, key, {
+        get() {
+          return cache[key] || color[key];
+        },
+      });
+    }
+  });
 }
+
+if (!isC256Disabled) {
+  for (var i = 0; i < 256; i++) {
+    c256List['c' + i] = ['38;5;' + i, 0];
+    c256List['bg' + i] = ['48;5;' + i, 0];
+  }
+}
+
 var clc = {
   color: color,
-  list: colorList,
-  log(str, colorType) { console.log(color(str, colorType)) },
-  isSupported() { return isSupported },
-  enable() { isSupported = true; init(); },
-  disable() { isSupported = false; init(); },
-  strip(str) { return str.replace(/\x1b\[\d+m/gm, '') },
+  list: Object.assign({}, colorList, c256List),
+  log(str, colorType) {
+    console.log(color(str, colorType));
+  },
+  isSupported() {
+    return isSupported;
+  },
+  enable() {
+    isSupported = true;
+    init();
+  },
+  disable() {
+    isSupported = false;
+    init();
+  },
+  strip(str) {
+    return str.replace(/\x1b\[\d+m/gm, '');
+  },
 };
-for (var i = 0; i < 256; i++) {
-  colorList['c' + i] = ['38;5;' + i, 0];
-  colorList['bg' + i] = ['48;5;' + i, 0];
-}
-Object.keys(colorList).forEach(function (key) {
-  colorList[key] = colorList[key].map(function (n) { return '\x1b[' + n + 'm' });
+color.list = clc.list;
+
+Object.keys(clc.list).forEach(function (key) {
+  clc.list[key] = clc.list[key].map(function (n) { return '\x1b[' + n + 'm' });
   clc.log[key] = function () {
     var arr = [];
     for (var i = 0; i < arguments.length; i++) arr.push(arguments[i]);

@@ -54,7 +54,8 @@
   "scripts": {
     "test": "node examples/index.js",
     "dr": "node benchmark/dry-run.mjs",
-    "benchmark": "node benchmark/index.mjs"
+    "benchmark": "node benchmark/index.mjs",
+    "mem": "node benchmark/measureMemory.cjs"
   },
   "devDependencies": {
     "ansi-colors": "^4.1.3",
